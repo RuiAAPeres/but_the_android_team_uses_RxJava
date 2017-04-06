@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		B208E8A31E96E8DE003A6855 /* AnyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E8A11E96E8DE003A6855 /* AnyError.swift */; };
 		B208E8A41E96E8DE003A6855 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E8A21E96E8DE003A6855 /* Observable.swift */; };
+		B208E8A61E96EA36003A6855 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E8A51E96EA36003A6855 /* Observer.swift */; };
+		B208E8A81E96EE09003A6855 /* Observable_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E8A71E96EE09003A6855 /* Observable_Tests.swift */; };
+		B208E8AD1E96F737003A6855 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = B208E8AB1E96F6C3003A6855 /* Event.swift */; };
 		B28566791E964F1300522F63 /* but_the_android_team_uses_RxJava.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B285666F1E964F1300522F63 /* but_the_android_team_uses_RxJava.framework */; };
 		B2B7A16C1E96545C00EDFF2A /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B7A16A1E96545C00EDFF2A /* ReactiveSwift.framework */; };
 		B2B7A16D1E96545C00EDFF2A /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B7A16B1E96545C00EDFF2A /* Result.framework */; };
@@ -27,6 +30,9 @@
 /* Begin PBXFileReference section */
 		B208E8A11E96E8DE003A6855 /* AnyError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyError.swift; sourceTree = "<group>"; };
 		B208E8A21E96E8DE003A6855 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		B208E8A51E96EA36003A6855 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		B208E8A71E96EE09003A6855 /* Observable_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable_Tests.swift; sourceTree = "<group>"; };
+		B208E8AB1E96F6C3003A6855 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		B285666F1E964F1300522F63 /* but_the_android_team_uses_RxJava.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = but_the_android_team_uses_RxJava.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B28566781E964F1300522F63 /* but_the_android_team_uses_RxJavaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = but_the_android_team_uses_RxJavaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B285668C1E964FDE00522F63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,6 +86,9 @@
 			children = (
 				B208E8A11E96E8DE003A6855 /* AnyError.swift */,
 				B208E8A21E96E8DE003A6855 /* Observable.swift */,
+				B208E8A71E96EE09003A6855 /* Observable_Tests.swift */,
+				B208E8A51E96EA36003A6855 /* Observer.swift */,
+				B208E8AB1E96F6C3003A6855 /* Event.swift */,
 				B285668A1E964FDE00522F63 /* Supporting Files */,
 			);
 			path = Sources;
@@ -185,6 +194,7 @@
 					};
 					B28566771E964F1300522F63 = {
 						CreatedOnToolsVersion = 8.3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -248,6 +258,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B208E8AD1E96F737003A6855 /* Event.swift in Sources */,
+				B208E8A61E96EA36003A6855 /* Observer.swift in Sources */,
 				B208E8A41E96E8DE003A6855 /* Observable.swift in Sources */,
 				B208E8A31E96E8DE003A6855 /* AnyError.swift in Sources */,
 			);
@@ -257,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B208E8A81E96EE09003A6855 /* Observable_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,10 +434,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "hey.but-the-android-team-uses-RxJavaTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -433,8 +449,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
 				INFOPLIST_FILE = "Tests/Supporting Files/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "hey.but-the-android-team-uses-RxJavaTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
