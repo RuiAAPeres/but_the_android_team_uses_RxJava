@@ -42,3 +42,18 @@ extension Observable {
         return producer.start(ReactiveSwift.Observer(ras_action))
     }
 }
+
+extension Observable {
+    public func map<U>(_ transform: @escaping (Element) -> U) -> Observable<U> {
+        let producer: SignalProducer<U, AnyError> = self.producer.map(transform)
+        return Observable<U>(producer: producer)
+    }
+
+    public func flatMap<U>(_ transform: @escaping (Element) -> Observable<U>) -> Observable<U> {
+        let ras_transform: (Element) -> SignalProducer<U, AnyError> = { element in
+            return transform(element).producer
+        }
+        let producer: SignalProducer<U, AnyError> = self.producer.flatMap(.merge, transform: ras_transform)
+        return Observable<U>(producer: producer)
+    }
+}
