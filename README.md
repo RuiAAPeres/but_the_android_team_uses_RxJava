@@ -6,7 +6,11 @@ This project is born from multiple discussions where RxSwift was picked over oth
 My personal and honest feelings about RxSwift, is that it has advantages over ReactiveSwift, but I find that most of the times people adopt RxSwift for two main reasons:
 
 1. Cargo cult.
-2. "but the android team uses RxJava".
+2. "but the android team uses RxJava".wefwefew
+we
+f
+wf
+
 
 Which, has you might suspect, are bad arguments.  
 
