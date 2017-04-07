@@ -26,9 +26,9 @@ extension Observable {
         return Observable(value: value)
     }
 
-    public static func create(subscriber: @escaping (Observer<Element>) -> ()) -> Observable<Element> {
-        let producer: SignalProducer<Element, AnyError> = SignalProducer { observer, _ in
-            subscriber(Observer(observer: observer))
+    public static func create(observer: @escaping (Observer<Element>) -> ()) -> Observable<Element> {
+        let producer: SignalProducer<Element, AnyError> = SignalProducer { o, _ in
+            observer(Observer(ras_observer: o))
         }
 
         return Observable(producer: producer)
