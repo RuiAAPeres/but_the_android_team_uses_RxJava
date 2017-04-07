@@ -3,8 +3,8 @@ import ReactiveSwift
 public struct Observer<Element> {
     private let observer: ReactiveSwift.Observer<Element, AnyError>
 
-    init(observer: ReactiveSwift.Observer<Element, AnyError>) {
-        self.observer = observer
+    init(ras_observer: ReactiveSwift.Observer<Element, AnyError>) {
+        self.observer = ras_observer
     }
 
     public init(action: @escaping (Event<Element>) -> Void) {
