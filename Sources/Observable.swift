@@ -50,10 +50,18 @@ extension Observable {
     }
 
     public func flatMap<U>(_ transform: @escaping (Element) -> Observable<U>) -> Observable<U> {
+        return flatMap(strategy: .merge, transform)
+    }
+
+    public func flatMapLatest<U>(_ transform: @escaping (Element) -> Observable<U>) -> Observable<U> {
+        return flatMap(strategy: .latest, transform)
+    }
+
+    private func flatMap<U>(strategy: FlattenStrategy, _ transform: @escaping (Element) -> Observable<U>) -> Observable<U> {
         let ras_transform: (Element) -> SignalProducer<U, AnyError> = { element in
             return transform(element).producer
         }
-        let producer: SignalProducer<U, AnyError> = self.producer.flatMap(.merge, transform: ras_transform)
+        let producer: SignalProducer<U, AnyError> = self.producer.flatMap(strategy, transform: ras_transform)
         return Observable<U>(producer: producer)
     }
 }
